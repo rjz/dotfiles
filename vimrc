@@ -1,0 +1,57 @@
+set t_Co=256
+
+set nu!
+set ts=2
+set shiftwidth=2
+set expandtab
+
+set tf
+
+set mouse=a
+
+colorscheme lucius
+LuciusDark
+
+filetype plugin indent on
+
+" vim-coffee-script settings
+au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+
+
+" show whitespace
+" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+highlight ExtraWhitespace ctermbg=darkred guibg=#af0000
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+set hlsearch
+
+" comments
+let @z='i// ^C^C'
+let @c='vip :normal @z'
+
+" Set text wrapping at the specified column
+function Widthifier(col)
+  let &l:textwidth=a:col
+  let &l:colorcolumn=a:col+1
+  let &l:tw=a:col
+endfunction
+
+" line @ 80 chars
+autocmd bufreadpre *.js call Widthifier(80)
+autocmd bufreadpre *.coffee call Widthifier(80)
+
+highlight ColorColumn ctermbg=0
+
+" try lucius' dark linenumberbg
+highlight ColorColumn ctermbg=238
+
+autocmd bufreadpre *.csv set nowrap
+
+
