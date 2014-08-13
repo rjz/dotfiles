@@ -148,3 +148,7 @@ alias git-prune-merged="git branch --merged master | grep -v 'master$' | xargs g
 # Show commits on current branch that aren't on master
 alias git-diff-master="git rev-parse --abbrev-ref HEAD | xargs git log ^master --pretty=oneline"
 
+# https://coderwall.com/p/lzgryq
+alias ccat='pygmentize -O style=monokai -f console256 -g'
+
+
