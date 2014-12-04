@@ -46,6 +46,12 @@ endfunction
 " line @ 80 chars
 autocmd bufreadpre *.js call Widthifier(80)
 autocmd bufreadpre *.coffee call Widthifier(80)
+autocmd bufreadpre *.sh call Widthifier(80)
+autocmd bufreadpre *.md call Widthifier(80)
+autocmd bufreadpre *.txt call Widthifier(80)
+autocmd bufreadpre *.scala call Widthifier(80)
+
+autocmd bufreadpre COMMIT_EDITMSG call Widthifier(72)
 
 highlight ColorColumn ctermbg=0
 
@@ -54,4 +60,5 @@ highlight ColorColumn ctermbg=238
 
 autocmd bufreadpre *.csv set nowrap
 
+map <C-n> :NERDTreeToggle<CR>
 
