@@ -14,6 +14,8 @@ LuciusDark
 
 filetype plugin indent on
 
+execute pathogen#infect()
+
 " vim-coffee-script settings
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
@@ -40,13 +42,13 @@ let @c='vip :normal @z'
 function Widthifier(col)
   let &l:textwidth=a:col
   let &l:colorcolumn=a:col+1
-  let &l:tw=a:col
 endfunction
 
 " line @ 80 chars
 autocmd bufreadpre *.js call Widthifier(80)
 autocmd bufreadpre *.coffee call Widthifier(80)
 autocmd bufreadpre *.sh call Widthifier(80)
+autocmd bufreadpre *.rb call Widthifier(80)
 autocmd bufreadpre *.md call Widthifier(80)
 autocmd bufreadpre *.txt call Widthifier(80)
 autocmd bufreadpre *.scala call Widthifier(80)
