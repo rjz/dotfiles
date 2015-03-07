@@ -2,7 +2,7 @@
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 # Install dependencies (ubuntu)
-for pkg in tmux vim python-pygments; do
+for pkg in tmux vim python-pygments build-essentials; do
   sudo apt-get install $pkg
 done
 
