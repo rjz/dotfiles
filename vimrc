@@ -20,6 +20,8 @@ execute pathogen#infect()
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 
+" vagrant
+au BufNewFile,BufReadPost Vagrantfile set ft=ruby
 
 " show whitespace
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
@@ -53,6 +55,8 @@ autocmd bufreadpre *.md call Widthifier(80)
 autocmd bufreadpre *.txt call Widthifier(80)
 autocmd bufreadpre *.scala call Widthifier(80)
 
+autocmd bufreadpre *.md setlocal spell spelllang=en_us
+
 autocmd bufreadpre COMMIT_EDITMSG call Widthifier(72)
 
 highlight ColorColumn ctermbg=0
@@ -63,4 +67,5 @@ highlight ColorColumn ctermbg=238
 autocmd bufreadpre *.csv set nowrap
 
 map <C-n> :NERDTreeToggle<CR>
+execute pathogen#infect()
 
