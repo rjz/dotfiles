@@ -11,6 +11,11 @@ PATHOGEN_SOURCE=https://raw.githubusercontent.com/tpope/vim-pathogen/master/auto
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
   curl -LSso ~/.vim/autoload/pathogen.vim $PATHOGEN_SOURCE
 
+# Install vim plugins
+git clone https://github.com/chase/vim-ansible-yaml.git ~/.vim/bundle/vim-ansible-yaml
+git clone https://github.com/kchmck/vim-coffee-script.git ~/.vim/bundle/vim-coffee-script
+git clone https://github.com/mxw/vim-jsx.git ~/.vim/bundle/vim-jsx
+
 # Copy files to home directory
 for f in *; do
   if [ "$f" != "setup.sh" ]; then
