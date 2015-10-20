@@ -55,6 +55,8 @@ autocmd bufreadpre *.md call Widthifier(80)
 autocmd bufreadpre *.txt call Widthifier(80)
 autocmd bufreadpre *.scala call Widthifier(80)
 
+autocmd bufreadpre *.java set ts=4
+
 autocmd bufreadpre *.md setlocal spell spelllang=en_us
 
 autocmd bufreadpre COMMIT_EDITMSG call Widthifier(72)
@@ -68,4 +70,8 @@ autocmd bufreadpre *.csv set nowrap
 
 map <C-n> :NERDTreeToggle<CR>
 execute pathogen#infect()
+
+set autoindent
+
+set tags=tags;.tags;/
 
