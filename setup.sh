@@ -16,6 +16,7 @@ git clone https://github.com/chase/vim-ansible-yaml.git ~/.vim/bundle/vim-ansibl
 git clone https://github.com/kchmck/vim-coffee-script.git ~/.vim/bundle/vim-coffee-script
 git clone https://github.com/mxw/vim-jsx.git ~/.vim/bundle/vim-jsx
 git clone https://github.com/elzr/vim-json.git ~/.vim/bundle/vim-json
+git clone https://github.com/plasticboy/vim-markdown.git ~/.vim/bundle/vim-markdown.git
 
 # Copy files to home directory
 for f in *; do
