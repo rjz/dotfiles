@@ -15,6 +15,7 @@ mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 git clone https://github.com/chase/vim-ansible-yaml.git ~/.vim/bundle/vim-ansible-yaml
 git clone https://github.com/kchmck/vim-coffee-script.git ~/.vim/bundle/vim-coffee-script
 git clone https://github.com/mxw/vim-jsx.git ~/.vim/bundle/vim-jsx
+git clone https://github.com/elzr/vim-json.git ~/.vim/bundle/vim-json
 
 # Copy files to home directory
 for f in *; do
