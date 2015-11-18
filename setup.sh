@@ -11,12 +11,18 @@ PATHOGEN_SOURCE=https://raw.githubusercontent.com/tpope/vim-pathogen/master/auto
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
   curl -LSso ~/.vim/autoload/pathogen.vim $PATHOGEN_SOURCE
 
+
 # Install vim plugins
-git clone https://github.com/chase/vim-ansible-yaml.git ~/.vim/bundle/vim-ansible-yaml
-git clone https://github.com/kchmck/vim-coffee-script.git ~/.vim/bundle/vim-coffee-script
-git clone https://github.com/mxw/vim-jsx.git ~/.vim/bundle/vim-jsx
-git clone https://github.com/elzr/vim-json.git ~/.vim/bundle/vim-json
-git clone https://github.com/plasticboy/vim-markdown.git ~/.vim/bundle/vim-markdown.git
+for repo in \
+  plasticboy/vim-markdown \
+  elzr/vim-json \
+  mxw/vim-jsx \
+  vim-coffee-script \
+  vim-ansible-yaml \
+; do
+  folder=$(basename $repo)
+  git clone https://github.com/${repo}.git ~/.vim/bundle/${folder}
+done
 
 # Copy files to home directory
 for f in *; do
