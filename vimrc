@@ -73,5 +73,5 @@ execute pathogen#infect()
 
 set autoindent
 
-set tags=tags;.tags;/
+set tags=tags;.tags;/;/.tags
 
