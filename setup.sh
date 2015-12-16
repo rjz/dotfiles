@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # http://stackoverflow.com/a/246128/1040371
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
@@ -17,8 +19,10 @@ for repo in \
   plasticboy/vim-markdown \
   elzr/vim-json \
   mxw/vim-jsx \
-  vim-coffee-script \
-  vim-ansible-yaml \
+  fatih/vim-go \
+  kchmck/vim-coffee-script \
+  chase/vim-ansible-yaml \
+  chrisbra/csv.vim \
 ; do
   folder=$(basename $repo)
   git clone https://github.com/${repo}.git ~/.vim/bundle/${folder}
@@ -28,8 +32,9 @@ done
 for f in *; do
   if [ "$f" != "setup.sh" ]; then
     target="$HOME/.$f"
-    rm -ri $target
-    ln -s "$DIR/$f" $target
+    if [[ `readlink ${target}` != "$DIR/$f" ]]; then
+      rm -ri $target
+      ln -s "$DIR/$f" $target
+    fi
   fi
 done
-
