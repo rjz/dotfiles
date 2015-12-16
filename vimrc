@@ -59,6 +59,9 @@ autocmd bufreadpre *.java set ts=4
 
 autocmd bufreadpre *.md setlocal spell spelllang=en_us
 
+" disable vim-markdown folding
+autocmd bufreadpre *.md set nofoldenable
+
 autocmd bufreadpre COMMIT_EDITMSG call Widthifier(72)
 
 highlight ColorColumn ctermbg=0
