@@ -9,10 +9,10 @@ set tf
 
 set mouse=a
 
+filetype plugin indent on
+
 colorscheme lucius
 LuciusDark
-
-filetype plugin indent on
 
 execute pathogen#infect()
 
@@ -77,3 +77,7 @@ execute pathogen#infect()
 set autoindent
 
 set tags=tags,.tags,./.tags
+
+" unmap Ctrl-c from :help ft_sql (http://unix.stackexchange.com/a/150769)
+let g:ftplugin_sql_omni_key = '<C-j>'
+
