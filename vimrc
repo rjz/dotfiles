@@ -81,3 +81,6 @@ set tags=tags,.tags,./.tags
 " unmap Ctrl-c from :help ft_sql (http://unix.stackexchange.com/a/150769)
 let g:ftplugin_sql_omni_key = '<C-j>'
 
+" makes vim play nicely-ish with fs watchers
+" ref: https://github.com/webpack/webpack/issues/781
+set backupcopy=yes
