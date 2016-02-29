@@ -52,6 +52,7 @@ autocmd bufreadpre *.coffee call Widthifier(80)
 autocmd bufreadpre *.sh call Widthifier(80)
 autocmd bufreadpre *.rb call Widthifier(80)
 autocmd bufreadpre *.md call Widthifier(80)
+autocmd bufreadpre *.msg call Widthifier(80)
 autocmd bufreadpre *.txt call Widthifier(80)
 autocmd bufreadpre *.scala call Widthifier(80)
 
