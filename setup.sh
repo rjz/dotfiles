@@ -3,13 +3,20 @@
 # http://stackoverflow.com/a/246128/1040371
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
+APT_PACKAGES=(
+  tmux
+  python-pygments
+  build-essentials
+  jq
+  curl
+)
+
 # Install dependencies (ubuntu)
 function install_packages () {
-  for pkg in tmux python-pygments build-essentials; do
+  for pkg in $APT_PACKAGES; do
     sudo apt-get install $pkg
   done
 }
-
 
 function install_dotfiles () {
   # Copy files to home directory
