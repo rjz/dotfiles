@@ -27,7 +27,7 @@ UBUNTU_CODENAME=$(lsb_release -a 2>/dev/null \
 
 APT_SOURCE_DOCKER=/etc/apt/sources.list.d/docker.list
 
-which docker && {
+which docker > /dev/null && {
   echo 'Docker is already installed -- skipping [re]install'
   exit 1
 }
@@ -45,6 +45,11 @@ apt-cache policy docker-engine > /dev/null || {
   exit 1
 }
 
-usermod ${SUDO_USER} -aG rj
+apt-get install docker-engine
+usermod ${SUDO_USER} -aG docker
 
-echo 'Docker installed!'
+echo 'Docker installed! Boot it up with:
+
+    $ sudo service docker start
+    $ sudo docker run hello-world
+'
