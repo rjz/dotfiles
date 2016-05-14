@@ -1,0 +1,22 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+FILENAME="$( basename "${BASH_SOURCE[0]}" )"
+PROJECTDIR="${DIR}/../../" # $DIR == ${PROJECTDIR}/.git/hooks
+
+log () {
+  echo -e "$(tput setaf 8)`date -u +"%Y-%m-%dT%H:%M:%SZ"`$(tput sgr 0) - $(tput setaf 6)$FILENAME$(tput sgr 0) - $1"
+}
+
+diff_files () {
+  # List files that will be changed in this commit
+  git diff --diff-filter=ACMRTUXB --no-commit-id --name-only HEAD
+}
+
+hook () {
+  log 'running hook'
+  diff_files
+  exit 0
+}
+
+time hook
