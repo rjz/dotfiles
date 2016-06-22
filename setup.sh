@@ -9,6 +9,7 @@ APT_PACKAGES=(
   build-essentials
   jq
   curl
+  ack-grep
 )
 
 # Install dependencies (ubuntu)
@@ -16,6 +17,10 @@ function install_packages () {
   for pkg in $APT_PACKAGES; do
     sudo apt-get install $pkg
   done
+
+  # Move `ack-grep` to `ack`
+  sudo dpkg-divert --local --divert /usr/bin/ack \
+    --rename --add /usr/bin/ack-grep
 }
 
 function install_dotfiles () {
@@ -33,3 +38,4 @@ function install_dotfiles () {
 
 ./scripts/install/vim.sh
 
+install_packages
