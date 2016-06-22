@@ -113,9 +113,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
 # Vim style keybindings
 set -o vi
 
@@ -151,4 +148,25 @@ alias git-diff-master="git rev-parse --abbrev-ref HEAD | xargs git log ^master -
 # https://coderwall.com/p/lzgryq
 alias ccat='pygmentize -O style=monokai -f console256 -g'
 
+repo () {
+  cd "${HOME}/Repositories/${1}"
+}
+
+safe_source () {
+  if [ -f "$1" ]; then
+    source "$1" || echo 'failed'
+  else
+    echo "Failed bootstrapping ${1}"
+  fi
+}
+
+safe_source $HOME/.travis/travis.sh
+
+# Set up `go`
+safe_source $HOME/.gvm/scripts/gvm
+export GOPATH=$HOME/drive/
+gvm use go1.6 > /dev/null
+
+safe_source $HOME/.rvm/scripts/rvm
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
