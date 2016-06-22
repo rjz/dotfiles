@@ -10,6 +10,7 @@ APT_PACKAGES=(
   jq
   curl
   ack-grep
+  awscli
 )
 
 # Install dependencies (ubuntu)
