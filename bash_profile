@@ -152,6 +152,18 @@ repo () {
   cd "${HOME}/Repositories/${1}"
 }
 
+_repo () {
+  COMPREPLY=()
+  local cur=${COMP_WORDS[COMP_CWORD]}
+	local k=0
+  for d in $( find -L "${HOME}/Repositories/" -maxdepth 2 -type d | cut -d/ -f5- ); do
+		[[ $d == ${cur}* ]] && COMPREPLY[k++]="$d/"
+	done
+  return 0
+}
+
+complete -F _repo -o filenames repo
+
 safe_source () {
   if [ -f "$1" ]; then
     source "$1" || echo 'failed'
