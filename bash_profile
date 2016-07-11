@@ -19,6 +19,9 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+DIR="$(dirname $(readlink -f "${BASH_SOURCE[0]}"))"
+FUNCTIONSDIR="${DIR}/scripts/functions"
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -148,21 +151,7 @@ alias git-diff-master="git rev-parse --abbrev-ref HEAD | xargs git log ^master -
 # https://coderwall.com/p/lzgryq
 alias ccat='pygmentize -O style=monokai -f console256 -g'
 
-repo () {
-  cd "${HOME}/Repositories/${1}"
-}
-
-_repo () {
-  COMPREPLY=()
-  local cur=${COMP_WORDS[COMP_CWORD]}
-	local k=0
-  for d in $( find -L "${HOME}/Repositories/" -maxdepth 2 -type d | cut -d/ -f5- ); do
-		[[ $d == ${cur}* ]] && COMPREPLY[k++]="$d/"
-	done
-  return 0
-}
-
-complete -F _repo -o filenames repo
+source "${FUNCTIONSDIR}/repo"
 
 safe_source () {
   if [ -f "$1" ]; then
