@@ -6,7 +6,7 @@ if [[ -z ${SUDO_USER} ]]; then
 fi
 
 configure_apt () {
-  #apt-get update
+  apt-get update
   apt-get install apt-transport-https ca-certificates
 
   # https://docs.docker.com/engine/installation/linux/ubuntulinux/
