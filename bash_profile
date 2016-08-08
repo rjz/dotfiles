@@ -166,6 +166,7 @@ safe_source $HOME/.travis/travis.sh
 # Set up `go`
 safe_source $HOME/.gvm/scripts/gvm
 export GOPATH=$HOME/drive/
+PATH=$PATH:$GOPATH/bin
 gvm use go1.6 > /dev/null
 
 safe_source $HOME/.rvm/scripts/rvm
