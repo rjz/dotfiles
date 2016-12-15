@@ -5,6 +5,7 @@ BUNDLE_PATH="${VIMDIR}/bundle"
 PATHOGEN_SOURCE=https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
 GITHUB_BUNDLES=(
+  'bronson/vim-trailing-whitespace'
   'plasticboy/vim-markdown'
   'elzr/vim-json'
   'mxw/vim-jsx'
