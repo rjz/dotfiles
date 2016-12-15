@@ -85,3 +85,7 @@ let g:ftplugin_sql_omni_key = '<C-j>'
 " makes vim play nicely-ish with fs watchers
 " ref: https://github.com/webpack/webpack/issues/781
 set backupcopy=yes
+
+" mac osx only
+set backspace=start,eol,indent
+syntax on

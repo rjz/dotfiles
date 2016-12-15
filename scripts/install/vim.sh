@@ -29,7 +29,16 @@ install_plugin () {
   fi
 }
 
-sudo apt-get install vim
+# Check if vim exists
+command -v vim > /dev/null || {
+  # Can we find it in apt?
+  if [ ! $(command -v apt) ]; then
+    sudo apt-get install vim
+  else
+    echo "apt isn't available. Please install vim manually before continuing"
+    exit 1
+  fi
+}
 
 # Install pathogen
 mkdir -p ${VIMDIR}/autoload ${VIMDIR}/bundle && \
