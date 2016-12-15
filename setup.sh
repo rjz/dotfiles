@@ -38,5 +38,9 @@ function install_dotfiles () {
 }
 
 ./scripts/install/vim.sh
+# install_dotfiles
 
-install_packages
+if [ $(uname) = 'Darwin' ]; then
+  # fix xterm
+  cp inputrc ~/.inputrc
+fi
