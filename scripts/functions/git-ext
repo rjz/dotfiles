@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Useful git things
+#
+# Show branches accessed most recently
+alias git-lately="git for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname)' refs/heads refs/remotes | head"
+
+# Prune branches that don't exist on `origin`
+alias git-prune-remote="git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d"
+
+__git_prune_merged () {
+  local branch=${1:-master}
+  git branch --merged "${branch}" \
+    | grep -v "${branch}$" \
+    | xargs git branch -d
+}
+
+# Prune branches that have been merged to master
+alias git-prune-merged="__git_prune_merged $1"
+
+# Show commits on current branch that aren't on master
+alias git-diff-master="git rev-parse --abbrev-ref HEAD | xargs git log ^master --pretty=oneline"
