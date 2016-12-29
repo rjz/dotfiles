@@ -19,7 +19,7 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-DIR="$(dirname $(readlink -f "${BASH_SOURCE[0]}"))"
+DIR="$(dirname $(readlink "${BASH_SOURCE[0]}"))"
 FUNCTIONSDIR="${DIR}/scripts/functions"
 
 # check the window size after each command and, if necessary,
@@ -134,44 +134,39 @@ alias accio=wget
 
 alias ..='cd ..'
 
-# Useful git things
-#
-# Show branches accessed most recently
-alias git-lately="git for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname)' refs/heads refs/remotes | head"
-
-# Prune branches that don't exist on `origin`
-alias git-prune-remote="git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d"
-
-# Prune branches that have been merged to master
-alias git-prune-merged="git branch --merged master | grep -v 'master$' | xargs git branch -d"
-
-# Show commits on current branch that aren't on master
-alias git-diff-master="git rev-parse --abbrev-ref HEAD | xargs git log ^master --pretty=oneline"
-
 # https://coderwall.com/p/lzgryq
 alias ccat='pygmentize -O style=monokai -f console256 -g'
 
 export GOPATH=$HOME/drive/
 PATH=$PATH:$GOPATH/bin
 
-. "${FUNCTIONSDIR}/repo"
+safe_source () {
+  if [ -f "$1" ]; then
+    source "$1" || echo 'failed'
+  else
+    echo "Failed bootstrapping ${1}"
+  fi
+}
 
 if [ $(uname) = 'Darwin' ]; then
   # nothing's going to work, ever again.
   echo 'my kingdom for a 🐧'
   export ANDROID_HOME=/usr/local/opt/android-sdk
 
+  for f in $(find "${FUNCTIONSDIR}" -type f -perm +111); do
+    source "$f"
+  done
+
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
+
+  alias xdg-open="open $1"
 else
-  safe_source () {
-    if [ -f "$1" ]; then
-      source "$1" || echo 'failed'
-    else
-      echo "Failed bootstrapping ${1}"
-    fi
-  }
+
+  for f in $(find "${FUNCTIONSDIR}" -type f -executable); do
+    source "$f"
+  done
 
   safe_source $HOME/.travis/travis.sh
 
@@ -182,4 +177,3 @@ else
   safe_source $HOME/.rvm/scripts/rvm
   PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 fi
-
