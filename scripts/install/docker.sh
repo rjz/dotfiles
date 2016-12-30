@@ -1,9 +1,8 @@
 #!/bin/bash
 
-if [[ -z ${SUDO_USER} ]]; then
-  echo "This script must be run under sudo" 1>&2
-  exit 1
-fi
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+. ${DIR}/../functions/require_sudo && require_sudo
 
 configure_apt () {
   apt-get update
