@@ -151,8 +151,6 @@ alias git-diff-master="git rev-parse --abbrev-ref HEAD | xargs git log ^master -
 # https://coderwall.com/p/lzgryq
 alias ccat='pygmentize -O style=monokai -f console256 -g'
 
-source "${FUNCTIONSDIR}/repo"
-
 safe_source () {
   if [ -f "$1" ]; then
     source "$1" || echo 'failed'
@@ -161,14 +159,27 @@ safe_source () {
   fi
 }
 
+for f in ${DIR}/scripts/functions/*; do
+  source $f
+done
+
 safe_source $HOME/.travis/travis.sh
 
 # Set up `go`
 safe_source $HOME/.gvm/scripts/gvm
 export GOPATH=$HOME/drive/
+export GOROOT=$HOME/Downloads/go1.7
 PATH=$PATH:$GOPATH/bin
 gvm use go1.6 > /dev/null
 
-safe_source $HOME/.rvm/scripts/rvm
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# Add android sdk to path for react-native
+# See: https://facebook.github.io/react-native/releases/0.24/docs/android-setup.html
+export ANDROID_HOME="$HOME/Downloads/android-sdk"
+export PATH="$PATH:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools"
 
+# Add RVM to PATH for scripting
+safe_source $HOME/.rvm/scripts/rvm
+PATH=$PATH:$HOME/.rvm/bin
+
+# Set editor for react-native
+export REACT_EDITOR=vim

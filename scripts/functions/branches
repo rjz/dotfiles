@@ -1,0 +1,14 @@
+#!/bin/bash
+
+branches () {
+  git branch | while read line; do
+    branch=$(echo "$line" | sed 's/^\* //')
+    head=$(git log "$branch" -n1 --pretty=format:'%h - %s')
+
+    if [[ "$branch" = "$line" ]]; then
+      echo "  $line - $head"
+    else
+      echo -e "\e[32m$line\e[39m - $head"
+    fi
+  done
+}
