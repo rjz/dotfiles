@@ -16,6 +16,8 @@ GITHUB_BUNDLES=(
   'leafgarland/typescript-vim'
   'vim-airline/vim-airline'
   'airblade/vim-gitgutter'
+  'junegunn/goyo.vim'
+  'junegunn/limelight.vim'
 )
 
 install_plugin () {
