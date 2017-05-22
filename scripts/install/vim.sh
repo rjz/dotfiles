@@ -18,6 +18,8 @@ GITHUB_BUNDLES=(
   'airblade/vim-gitgutter'
   'junegunn/goyo.vim'
   'junegunn/limelight.vim'
+  'aperezdc/vim-template'
+  'fholgado/minibufexpl.vim'
 )
 
 install_plugin () {

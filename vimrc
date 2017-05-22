@@ -78,6 +78,10 @@ autocmd bufreadpre *.csv set nowrap
 
 map <C-n> :NERDTreeToggle<CR>
 
+map <Leader>e :MBEOpen<cr>
+map <Leader>c :MBEClose<cr>
+map <Leader>t :MBEToggle<cr>
+
 function! GetFullPath()
   return fnamemodify(expand("%h"), ":~:.:s?src/??:h")
 endfunction
