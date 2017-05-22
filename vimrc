@@ -77,7 +77,14 @@ highlight ColorColumn ctermbg=238
 autocmd bufreadpre *.csv set nowrap
 
 map <C-n> :NERDTreeToggle<CR>
-execute pathogen#infect()
+
+function! GetFullPath()
+  return fnamemodify(expand("%h"), ":~:.:s?src/??:h")
+endfunction
+
+let g:templates_user_variables = [
+    \   ['FULLPATH', 'GetFullPath'],
+    \ ]
 
 set autoindent
 
