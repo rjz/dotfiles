@@ -76,11 +76,11 @@ highlight ColorColumn ctermbg=238
 
 autocmd bufreadpre *.csv set nowrap
 
-map <C-n> :NERDTreeToggle<CR>
+noremap <C-n> :NERDTreeFind<CR>
 
-map <Leader>e :MBEOpen<cr>
-map <Leader>c :MBEClose<cr>
-map <Leader>t :MBEToggle<cr>
+noremap <Leader>m :MBEToggle<cr>
+noremap <Leader>h :MBEbn<CR>
+noremap <Leader>l :MBEbp<CR>
 
 function! GetFullPath()
   return fnamemodify(expand("%h"), ":~:.:s?src/??:h")
