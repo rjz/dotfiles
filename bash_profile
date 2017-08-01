@@ -140,11 +140,16 @@ alias ccat='pygmentize -O style=monokai -f console256 -g'
 export GOPATH=$HOME/drive/
 PATH=$PATH:$GOPATH/bin
 
+cmd_exists () {
+  which "$1" > /dev/null
+}
+
 safe_source () {
   if [ -f "$1" ]; then
     source "$1" || echo 'failed'
-  else
-    echo "Failed bootstrapping ${1}"
+  # uncomment for warnings!
+  # else
+  #   echo "failed bootstrapping ${1}"
   fi
 }
 
@@ -172,8 +177,16 @@ else
 
   # Set up `go`
   safe_source $HOME/.gvm/scripts/gvm
-  gvm use go1.6 > /dev/null
+  if cmd_exists gvm; then
+    gvm use go1.6 > /dev/null
+  fi
 
   safe_source $HOME/.rvm/scripts/rvm
-  PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+  if cmd_exists rvm; then
+    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+  fi
+fi
+
+if [ -f "${HOME}/.bash_local" ]; then
+  source "${HOME}/.bash_local"
 fi
