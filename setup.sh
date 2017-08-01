@@ -9,36 +9,45 @@ APT_PACKAGES=(
   build-essentials
   jq
   curl
-  ack-grep
+  nmap
   awscli
 )
 
-# Install dependencies (ubuntu)
-function install_packages () {
-  for pkg in $APT_PACKAGES; do
-    sudo apt-get install $pkg
-  done
-
-  # Move `ack-grep` to `ack`
-  sudo dpkg-divert --local --divert /usr/bin/ack \
-    --rename --add /usr/bin/ack-grep
+fatal () {
+  echo "FATAL: '$1'"
+  exit 2
 }
 
-function install_dotfiles () {
+
+# Install dependencies (ubuntu)
+install_packages () {
+  for pkg in "${APT_PACKAGES[@]}"; do
+    echo "INSTALLING $pkg..."
+    sudo apt-get install $pkg
+  done
+}
+
+install_dotfiles () {
   # Copy files to home directory
-  for f in *; do
-    if [ "$f" != "setup.sh" ]; then
-      target="$HOME/.$f"
-      if [[ `readlink ${target}` != "$DIR/$f" ]]; then
-        rm -ri $target
-        ln -s "$DIR/$f" $target
-      fi
+  for p in vim $(find `pwd` -maxdepth 1 -type f \
+    | grep -v setup.sh \
+    | grep -v screenshot.png \
+    | grep -v README.md
+  ); do
+    local f="$(basename "$p")"
+    local dst="$HOME/.$f"
+    local src="$DIR/$f"
+    echo "linking ${src} => $dst"
+    if [[ "$(readlink ${dst})" != "$src" ]]; then
+      rm -rf $dst
+      ln -s ${src} $dst
     fi
   done
 }
 
+install_packages || fatal 'installing packages'
+install_dotfiles
 ./scripts/install/vim.sh
-# install_dotfiles
 
 if [ $(uname) = 'Darwin' ]; then
   # fix xterm
