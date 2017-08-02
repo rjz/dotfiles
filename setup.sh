@@ -11,6 +11,7 @@ APT_PACKAGES=(
   curl
   nmap
   awscli
+  fortune
 )
 
 fatal () {
