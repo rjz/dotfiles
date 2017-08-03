@@ -180,7 +180,8 @@ else
   # Set up `go`
   safe_source $HOME/.gvm/scripts/gvm
   if cmd_exists gvm; then
-    gvm use go1.6 > /dev/null
+    latest_go_version=$(gvm list | grep -Eo 'go[0-9\.]+' | tail -n1)
+    gvm use "$latest_go_version" > /dev/null
   fi
 
   safe_source $HOME/.rvm/scripts/rvm
