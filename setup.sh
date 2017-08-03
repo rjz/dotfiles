@@ -6,12 +6,13 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 APT_PACKAGES=(
   tmux
   python-pygments
-  build-essentials
+  build-essential
   jq
   curl
   nmap
   awscli
   fortune
+  exuberant-ctags
 )
 
 fatal () {
