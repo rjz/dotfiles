@@ -124,6 +124,9 @@ set -o vi
 # git log graph from @ms
 alias lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 
+# 256 color tmux, please!
+alias tmux="TERM=screen-256color-bce tmux"
+
 alias prettyjson="python -mjson.tool"
 alias lipsum="curl --silent http://loripsum.net/api | xclip -sel clip && echo 'Lorem ipsum → clipboard'"
 alias nm-reboot="ps ax -o command,pid | grep '^nm-applet' | grep -Po '\d+$' | xargs kill && nm-applet 2> /dev/null &"
