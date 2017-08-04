@@ -13,6 +13,7 @@ APT_PACKAGES=(
   awscli
   fortune
   exuberant-ctags
+  vim-gnome `# clipboard support for normal vim`
 )
 
 fatal () {
@@ -49,7 +50,7 @@ install_dotfiles () {
 
 install_packages || fatal 'installing packages'
 install_dotfiles
-./scripts/install/vim.sh
+${DIR}/scripts/install/vim.sh
 
 if [ $(uname) = 'Darwin' ]; then
   # fix xterm
