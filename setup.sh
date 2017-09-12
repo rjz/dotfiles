@@ -10,6 +10,8 @@ APT_PACKAGES=(
   jq
   curl
   nmap
+  whois
+  uuid
   awscli
   fortune
   exuberant-ctags
