@@ -50,6 +50,10 @@ install_dotfiles () {
   done
 }
 
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get autoremove
+
 install_packages || fatal 'installing packages'
 install_dotfiles
 ${DIR}/scripts/install/vim.sh
