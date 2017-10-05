@@ -20,6 +20,7 @@ GITHUB_BUNDLES=(
   'junegunn/limelight.vim'
   'aperezdc/vim-template'
   'fholgado/minibufexpl.vim'
+  'ctrlpvim/ctrlp.vim'
 )
 
 install_plugin () {
