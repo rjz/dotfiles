@@ -23,33 +23,50 @@ GITHUB_BUNDLES=(
   'ctrlpvim/ctrlp.vim'
 )
 
+log() {
+  echo "[install/vim]: $@"
+}
+
+install_vim () {
+  command -v vim > /dev/null || {
+    log 'vim not available. Attempting apt install'
+    if [ ! $(command -v apt) ]; then
+      sudo apt-get install vim
+    else
+      log "apt isn't available. Please install vim manually before continuing"
+      exit 1
+    fi
+  }
+}
+
+install_pathogen () {
+  log 'installing pathogen'
+  mkdir -p ${VIMDIR}/autoload ${VIMDIR}/bundle && \
+    curl -LSso ${VIMDIR}/autoload/pathogen.vim $PATHOGEN_SOURCE
+}
+
 install_plugin () {
   local target="$BUNDLE_PATH/$(basename $repo)"
   if [[ -d "$target" ]]; then
-    echo "'$repo' (vim plugin): Checking github for updates ..."
-    ( cd $target && git fetch && git pull -q origin master )
+    log "plugin: checking for updates to '$repo' ..."
+    ( cd $target && git fetch && git pull -q origin master > /dev/null )
   else
-    echo "'$repo' (vim plugin): Installing from github..."
+    log "plugin: installing '$repo' ..."
     git clone https://github.com/${repo}.git $target > /dev/null
   fi
 }
 
-# Check if vim exists
-command -v vim > /dev/null || {
-  # Can we find it in apt?
-  if [ ! $(command -v apt) ]; then
-    sudo apt-get install vim
-  else
-    echo "apt isn't available. Please install vim manually before continuing"
-    exit 1
-  fi
+create_helptags () {
+  log 'Adding :helptags'
+  vim -c "$(find "$BUNDLE_PATH" -type d -name doc | sed 's/^/:helptags /')
+q"
 }
 
-# Install pathogen
-mkdir -p ${VIMDIR}/autoload ${VIMDIR}/bundle && \
-  curl -LSso ${VIMDIR}/autoload/pathogen.vim $PATHOGEN_SOURCE
+install_vim
+install_pathogen
 
-# Install vim plugins
 for repo in ${GITHUB_BUNDLES[@]}; do
   install_plugin "$repo"
 done
+
+create_helptags
