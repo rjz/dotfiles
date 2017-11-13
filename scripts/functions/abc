@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# evaluate arguments in `bc`
+abc() {
+  echo "$@" | bc -l
+}
