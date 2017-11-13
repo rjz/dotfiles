@@ -21,6 +21,7 @@ GITHUB_BUNDLES=(
   'aperezdc/vim-template'
   'fholgado/minibufexpl.vim'
   'ctrlpvim/ctrlp.vim'
+  'reasonml-editor/vim-reason-legacy'
 )
 
 log() {
