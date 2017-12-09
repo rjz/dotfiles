@@ -1,0 +1,13 @@
+#!/bin/bash
+
+which npm > /dev/null || {
+  echo "$(basename "$BASH_SOURCE"): npm is not installed; skipping extensions"
+  return
+}
+
+npm-scripts() {
+  cat package.json \
+    | jq -r '"Scripts for "
+      + .name + "@" + .version + ":\n  * "
+      + (.scripts | keys | join("\n  * "))'
+}
