@@ -158,6 +158,9 @@ safe_source () {
   fi
 }
 
+# See https://github.com/dsnet/gotab
+cmd_exists gotab && complete -C gotab -o nospace go
+
 if [ $(uname) = 'Darwin' ]; then
   # nothing's going to work, ever again.
   echo 'my kingdom for a 🐧'

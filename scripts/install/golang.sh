@@ -17,7 +17,15 @@ install_latest() {
     | sed 's/\s*//' | grep -xE 'go[0-9]+\.[0-9]+' | sort | tail -n1)
   export GOROOT_BOOTSTRAP=$(dirname $(dirname $(readlink -f $(which go))))
   echo $GOROOT_BOOTSTRAP
+  echo "$latest"
   gvm install "$latest"
+  gvm use "$latest" --default
+}
+
+install_helpers() {
+  echo 'Installing helpers'
+  go get github.com/dsnet/gotab
+  go get github.com/nsf/gocode
 }
 
 cmd_exists bison || sudo apt-get install bison
@@ -29,8 +37,9 @@ cmd_exists gvm || {
   install_gvm
 }
 
-if [[ -z "$GVM_ROOT" ]]; then
-  source ${HOME}/.gvm/scripts/gvm
+if [[ -s "$GVM_ROOT/scripts/gvm" ]]; then
+  source "$GVM_ROOT/scripts/gvm"
 fi
 
 install_latest
+install_helpers
