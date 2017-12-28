@@ -1,0 +1,6 @@
+#!/bin/bash
+
+function backlog() {
+  # oh, my soul.
+  grep -nr TODO "${1:-.}" | sed 's/\/\//\$/' | column -t -s$
+}
