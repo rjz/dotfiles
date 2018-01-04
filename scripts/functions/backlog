@@ -2,5 +2,8 @@
 
 function backlog() {
   # oh, my soul.
-  grep -nr TODO "${1:-.}" | sed 's/\/\//\$/' | column -t -s$
+  grep -Hnor 'TODO.*' "${1:-.}" \
+    | sed 's/TODO//' \
+    | sed 's/:/$/g' \
+    | column -t -s$
 }
