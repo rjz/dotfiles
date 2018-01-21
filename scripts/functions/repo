@@ -15,12 +15,24 @@ _repo () {
   COMPREPLY=()
   local cur=${COMP_WORDS[COMP_CWORD]}
 	local k=0
+
   # http://stackoverflow.com/a/16679640/1040371
   local delims="${REPOSITORYDIR//[^\/]}/"
-  for d in $( find -L "${REPOSITORYDIR}" -maxdepth 2 -type d | cut -d/ -f${#delims}- ); do
-		[[ $d == ${cur}* ]] && COMPREPLY[k++]="$d/"
+  local matches=$(find -L "${REPOSITORYDIR}" -maxdepth 2 -type d \
+    | grep "^${REPOSITORYDIR}$cur" \
+    | cut -d/ -f${#delims}-)
+  local first_match=$(echo "$matches" | head -n1)
+
+  # break early if we haven't matched the a top-level directory yet
+  echo "$first_match" | grep -q '/' || {
+    COMPREPLY[0]="$first_match/"
+    return 0
+  }
+
+  for d in $matches; do
+		[[ $d == ${cur}* ]] && COMPREPLY[k++]="$d"
 	done
   return 0
 }
 
-complete -F _repo -o filenames repo
+complete -F _repo -o nospace -o filenames repo
