@@ -1,0 +1,23 @@
+#! /bin/bash
+
+# Add OSX-style drop shadow to a screenshot
+screenshadow() {
+  local src="$1"
+
+  local height=$(identify -format '%h' "$src")
+  local width=$(identify -format '%w' "$src")
+  local radius=3
+
+  local outfile="pretty_$(basename "$1")"
+
+  convert \
+    \( -size ${width}x${height} xc:none -fill white \
+      -draw "roundRectangle 0,0 $width,$height $radius,$radius" \
+      -draw "rectangle 0,$radius,$width,$height" \
+      "$src" -compose SrcIn -composite \) \
+    \( -clone 0 -background \#231f20 -shadow 60x15+0+15 \) \
+    -reverse -background none -compose Over -layers merge +repage \
+    "$outfile"
+
+  echo "Saved to $outfile"
+}
