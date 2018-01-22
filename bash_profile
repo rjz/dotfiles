@@ -134,6 +134,7 @@ alias nm-reboot="ps ax -o command,pid | grep '^nm-applet' | grep -Po '\d+$' | xa
 alias localtunnel="localtunnel -k ~/.ssh/id_rsa.pub"
 
 export CLICOLOR=1
+export EDITOR=vim
 
 alias accio=wget
 
