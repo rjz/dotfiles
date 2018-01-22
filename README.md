@@ -5,7 +5,7 @@ OS X.
 
 ## Glamour shot
 
-![Screenshot](screenshot.png)
+[![Screenshot](screenshot.png)](https://raw.githubusercontent.com/rjz/dotfiles/master/screenshot.png)
 
 ## Install
 
