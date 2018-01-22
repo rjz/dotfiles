@@ -98,7 +98,7 @@ set tags=tags,.tags,./.tags
 let g:ftplugin_sql_omni_key = '<C-j>'
 
 " ignore build/node_modules directories for :CtrlP
-let g:ctrlp_custom_ignore = { 'dir': 'build$\|node_modules$\|reports$' }
+let g:ctrlp_custom_ignore = { 'dir': 'build$\|node_modules$' }
 
 " makes vim play nicely-ish with fs watchers
 " ref: https://github.com/webpack/webpack/issues/781
