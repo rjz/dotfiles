@@ -6,14 +6,15 @@ screenshadow() {
 
   local height=$(identify -format '%h' "$src")
   local width=$(identify -format '%w' "$src")
-  local radius=3
+  local inset=2
+  local radius=5
 
   local outfile="pretty_$(basename "$1")"
 
   convert \
     \( -size ${width}x${height} xc:none -fill white \
-      -draw "roundRectangle 0,0 $width,$height $radius,$radius" \
-      -draw "rectangle 0,$radius,$width,$height" \
+      -draw "roundRectangle 0,0 $(($width-$inset)),$(($height-$inset)) $radius,$radius" \
+      -draw "rectangle 0,10 $(($width-$inset)),$(($height-$inset))" \
       "$src" -compose SrcIn -composite \) \
     \( -clone 0 -background \#231f20 -shadow 60x15+0+15 \) \
     -reverse -background none -compose Over -layers merge +repage \
