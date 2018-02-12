@@ -6,6 +6,7 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 APT_PACKAGES=(
   tmux
   python-pygments
+  bats
   build-essential
   jq
   curl
