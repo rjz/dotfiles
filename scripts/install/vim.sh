@@ -6,7 +6,7 @@ PATHOGEN_SOURCE=https://raw.githubusercontent.com/tpope/vim-pathogen/master/auto
 
 GITHUB_BUNDLES=(
   'bronson/vim-trailing-whitespace'
-  'jonathanfilip/lucius'
+  'jonathanfilip/vim-lucius'
   'scrooloose/nerdtree'
   'vim-airline/vim-airline'
   'airblade/vim-gitgutter'

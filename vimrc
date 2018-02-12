@@ -11,10 +11,10 @@ set mouse=a
 
 filetype plugin indent on
 
+execute pathogen#infect()
+
 colorscheme lucius
 LuciusDark
-
-execute pathogen#infect()
 
 " vim-coffee-script settings
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
