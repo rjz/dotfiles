@@ -6,22 +6,14 @@ PATHOGEN_SOURCE=https://raw.githubusercontent.com/tpope/vim-pathogen/master/auto
 
 GITHUB_BUNDLES=(
   'bronson/vim-trailing-whitespace'
-  'plasticboy/vim-markdown'
-  'elzr/vim-json'
-  'mxw/vim-jsx'
-  'fatih/vim-go'
-  'kchmck/vim-coffee-script'
-  'chase/vim-ansible-yaml'
-  'chrisbra/csv.vim'
-  'leafgarland/typescript-vim'
+  'jonathanfilip/lucius'
+  'scrooloose/nerdtree'
   'vim-airline/vim-airline'
   'airblade/vim-gitgutter'
-  'junegunn/goyo.vim'
-  'junegunn/limelight.vim'
   'aperezdc/vim-template'
   'fholgado/minibufexpl.vim'
   'ctrlpvim/ctrlp.vim'
-  'reasonml-editor/vim-reason-legacy'
+  'sheerun/vim-polyglot'
 )
 
 log() {
