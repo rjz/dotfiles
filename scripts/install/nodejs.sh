@@ -4,13 +4,19 @@ set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-. "${DIR}/../functions/require_sudo" && require_sudo
+install_nvm () {
+  curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
 
-install_nodejs () {
-  curl -sL https://deb.nodesource.com/setup_8.x | bash -
-  apt-get install -y nodejs
+  # Add it to the session immediately
+  export NVM_DIR="$HOME/.config/nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 }
 
-which node > /dev/null || install_nodejs
+install_nodejs () {
+  nvm install --lts
+  nvm use node
+}
 
-npm config set prefix /usr/local/
+which nvm > /dev/null || install_nvm
+which node > /dev/null || install_nodejs
