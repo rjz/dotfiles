@@ -16,7 +16,7 @@ APT_PACKAGES=(
   awscli
   fortune
   exuberant-ctags
-  vim-gnome `# clipboard support for normal vim`
+  vim-gtk `# clipboard support for normal vim`
 )
 
 fatal () {
@@ -35,7 +35,7 @@ install_packages () {
 
 install_dotfiles () {
   # Copy files to home directory
-  for p in vim $(find `pwd` -maxdepth 1 -type f \
+  for p in $(find `pwd` -maxdepth 1 -type f \
     | grep -v setup.sh \
     | grep -v screenshot.png \
     | grep -v README.md
