@@ -124,9 +124,6 @@ set -o vi
 # git log graph from @ms
 alias lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 
-# 256 color tmux, please!
-alias tmux="TERM=screen-256color-bce tmux"
-
 alias prettyjson="python -mjson.tool"
 alias lipsum="curl --silent http://loripsum.net/api | xclip -sel clip && echo 'Lorem ipsum → clipboard'"
 alias nm-reboot="ps ax -o command,pid | grep '^nm-applet' | grep -Po '\d+$' | xargs kill && nm-applet 2> /dev/null &"
@@ -137,6 +134,7 @@ export CLICOLOR=1
 export EDITOR=vim
 
 alias accio=wget
+alias tmux='tmux -2'
 
 alias ..='cd ..'
 
@@ -161,41 +159,6 @@ safe_source () {
 
 # See https://github.com/dsnet/gotab
 cmd_exists gotab && complete -C gotab -o nospace go
-
-if [ $(uname) = 'Darwin' ]; then
-  # nothing's going to work, ever again.
-  echo 'my kingdom for a 🐧'
-  export ANDROID_HOME=/usr/local/opt/android-sdk
-
-  for f in $(find "${FUNCTIONSDIR}" -type f -perm +111); do
-    source "$f"
-  done
-
-  if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-  fi
-
-  alias xdg-open="open $1"
-else
-
-  for f in $(find "${FUNCTIONSDIR}" -type f -executable); do
-    source "$f"
-  done
-
-  safe_source $HOME/.travis/travis.sh
-
-  # Set up `go`
-  safe_source $HOME/.gvm/scripts/gvm
-  if cmd_exists gvm; then
-    latest_go_version=$(gvm list | grep -Eo 'go[0-9\.]+' | tail -n1)
-    gvm use "$latest_go_version" > /dev/null
-  fi
-
-  safe_source $HOME/.rvm/scripts/rvm
-  if cmd_exists rvm; then
-    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-  fi
-fi
 
 if [ -f "${HOME}/.bash_local" ]; then
   source "${HOME}/.bash_local"
