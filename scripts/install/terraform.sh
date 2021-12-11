@@ -1,4 +1,9 @@
-#!/bin/sh
+#!/bin/bash
+
+set -e
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+. ${DIR}/../functions/require_sudo && require_sudo
 
 # Fetch all released versions (rc-x will be ignored)
 VERSIONS=$(curl -s https://releases.hashicorp.com/terraform/ \
@@ -13,9 +18,14 @@ ZIP=terraform_${LAST_VERSION}_${PLATFORM}.zip
 URL=https://releases.hashicorp.com/terraform/${LAST_VERSION}/${ZIP}
 
 INSTALL_DIR="$(pwd)/terraform"
+ZIP_PATH="${INSTALL_DIR}/${ZIP}"
 
-mkdir -f "${INSTALL_DIR}"
+mkdir -p "${INSTALL_DIR}"
 
-wget -O "${INSTALL_DIR}"/${ZIP} ${URL}
+[[ -f "${ZIP_PATH}" ]] || wget -O "${ZIP_PATH}" "${URL}"
+[[ -x "${INSTALL_DIR}/terraform" ]] || unzip "${ZIP_PATH}" -d "${INSTALL_DIR}"
 
-find -name 'terraform*' -executable -exec ln -s "${INSTALL_DIR}"/{} /usr/local/bin/{} \;
+(
+  cd terraform
+  find -type f -executable -exec ln -s "${INSTALL_DIR}"/{} /usr/local/bin/{} \;
+)
